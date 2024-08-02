@@ -1,9 +1,11 @@
 import {
   AllowedMentionsTypes,
+  BitField,
   Client,
   Collection,
   GatewayIntentBits,
-  Partials
+  Partials,
+  PermissionsString
 } from 'discord.js'
 import semver from 'semver'
 import type Command from './structure/Command'
@@ -12,9 +14,11 @@ import Util from './structure/Util'
 
 export default class BaseClient extends Client {
   public commands: Collection<string, Command>
-  public aliases: Collection<string, Command>
   public events: Collection<string, Event>
   public utils: Util
+
+  public debug!: boolean;
+	public defaultPermissions!: Readonly<BitField<PermissionsString, bigint>>;
   public constructor(options: ClientOptions) {
     super({
       intents: [
@@ -32,9 +36,10 @@ export default class BaseClient extends Client {
     this.validate(options)
 
     this.commands = new Collection()
-    this.aliases = new Collection()
     this.events = new Collection()
     this.utils = new Util(this)
+
+    this.debug = options.debug;
   }
 
   private validate(options: ClientOptions) {

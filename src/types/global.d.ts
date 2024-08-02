@@ -5,7 +5,6 @@ import type BaseClient from '../lib/BaseClient'
 declare global {
   interface ClientOptions {
     token: string;
-    prefix: string;
     debug: boolean;
     defaultPermissions: PermissionsString[];
   }
@@ -26,8 +25,8 @@ declare global {
   }
 
   interface EventOptions {
-    name: Events
-    description: string
+    name: Events | string;
+    description?: string
     once?: boolean
   }
 }

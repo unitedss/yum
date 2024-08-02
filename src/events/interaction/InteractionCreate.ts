@@ -49,8 +49,7 @@ export default class extends Event {
 
         const replies = [
           'An error has occured when executing this command.',
-          'If the issue persists, please contact us in our Support Server.',
-          'https://velvetta.us/discord'
+          'If the issue persists, please contact us in our Support Server.'
         ].join('\n')
 
         if (interaction.deferred)

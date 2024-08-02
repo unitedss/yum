@@ -11,6 +11,9 @@ export default class extends Command {
   }
 
   public execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
+
+    const maped = this.client.commands.map(c => c.name)
+    console.log(maped)
     const embed = new EmbedBuilder()
       .setAuthor({
         iconURL: this.client.user?.displayAvatarURL({

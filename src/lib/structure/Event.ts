@@ -4,8 +4,8 @@ import type BaseClient from '../BaseClient'
 
 export default abstract class Event {
   client: BaseClient
-  name: Events
-  description: string
+  name: Events | string;
+  description?: string
   once: boolean
 
   public constructor(client: BaseClient, options: EventOptions) {
