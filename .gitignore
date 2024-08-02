@@ -128,8 +128,6 @@ dist
 
 # public
 
-.bun.lockb
-
 # vuepress build output
 
 .vuepress/dist

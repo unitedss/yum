@@ -4,13 +4,16 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "lint": "eslint . --ext mjs,js,ts --fix",
+    "lint": "bunx biome lint --write src/*.ts",
+    "fmt": "bunx biome format --write src/*.ts",
     "register": "bun dist/src/interactions/register.js -g",
     "build": "rimraf ./dist && swc ./src --out-dir ./dist --copy-files && bun dist/src/interactions/register.js -g && bun --no-warnings ./dist/src/index.js",
     "start": "bun --no-warnings ./dist/src/index.js",
     "dev": "bun --watch src/index.ts"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.8.3",
+    "@ryuux/config": "1.0.2",
     "@types/bun": "latest"
   },
   "peerDependencies": {
