@@ -17,15 +17,19 @@ export default class extends Command {
     const user = interaction.options.getUser('user') || interaction.user;
 
     const usExists = await prisma.user.findFirst({ where: { userId: user.id }})
-    if(!usExists) this.error(interaction, "You aren't registered yet!")
+    if(!usExists) this.error(interaction, `**${user.username}** isn't registered. Try using \`/register\`.`)
 
     const embed = new EmbedBuilder()
 
     .setAuthor({ name: user.username, iconURL: user.displayAvatarURL({ forceStatic: true })})
     .setDescription(`${usExists?.username}`)
+    .addFields({
+        name: 'Bio',
+        value: `\`\`\`${usExists?.bio}\`\`\``
+    })
     .setFooter({ text: `<t:${Math.floor(usExists?.createdAt.getTime() as number / 1000)}:R>`})
     .setColor(0xfbfbf9)
 
-    interaction.reply({ embeds: [embed] })
+    await interaction.reply({ embeds: [embed] })
   }
 }

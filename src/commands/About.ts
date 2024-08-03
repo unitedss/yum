@@ -1,8 +1,6 @@
 import { EmbedBuilder, type ChatInputCommandInteraction } from 'discord.js'
 import type BaseClient from '../lib/BaseClient'
 import Command from '../lib/structure/Command'
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient();
 
 export default class extends Command {
   public constructor(client: BaseClient) {
