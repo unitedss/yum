@@ -17,13 +17,21 @@ export default class extends Command {
     const user = interaction.options.getUser('user') || interaction.user;
 
     const usExists = await prisma.user.findFirst({ where: { userId: user.id }})
-    if(!usExists) this.error(interaction, `**${user.username}** isn't registered. Try using \`/register\`.`)
+    if(!usExists) return this.error(interaction, `**${user.username}** isn't registered. Try using \`/register\`.`)
+
+      const bots = await prisma.bot.findMany({ where: { userId: usExists.userId }})
 
     const embed = new EmbedBuilder()
 
     .setAuthor({ name: user.username, iconURL: user.displayAvatarURL({ forceStatic: true })})
     .setDescription(`${usExists?.username}`)
-    .addFields({
+    .addFields(
+      {
+        name: 'Bots',
+        value: `${bots.map(bot => bot.name)}`,
+        inline: true
+      },
+      {
         name: 'Bio',
         value: `\`\`\`${usExists?.bio}\`\`\``
     })

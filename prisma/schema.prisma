@@ -14,8 +14,19 @@ datasource db {
 }
 
 model User {
-  userId String @unique
+  userId String @id
   username String
   bio String
   createdAt DateTime @default(now())
+  bots Bot[]
+}
+
+model Bot {
+  botId Int @id @default(autoincrement())
+  name String 
+  description String?
+  avatar String?
+  createdAt DateTime
+  userId String
+  user User @relation(fields: [userId], references: [userId])
 }
